@@ -162,7 +162,6 @@ Error: %(text)s
         title = self._content.name
         channel = self._get_channel()
         body = self._get_body()
-        file_type = "csv" if self._content.csv else "png"
         try:
             token = app.config["SLACK_API_TOKEN"]
             if callable(token):
@@ -170,14 +169,11 @@ Error: %(text)s
             client = WebClient(token=token, proxy=app.config["SLACK_PROXY"])
             # files_upload returns SlackResponse as we run it in sync mode.
             if files:
-                for file in files:
-                    client.files_upload(
-                        channels=channel,
-                        file=file,
-                        initial_comment=body,
-                        title=title,
-                        filetype=file_type,
-                    )
+                client.files_upload_v2(
+                    file_uploads=[{"file": file, "title": title} for file in files],
+                    channels=channel,
+                    initial_comment=body,
+                )
             else:
                 client.chat_postMessage(channel=channel, text=body)
             logger.info("Report sent to slack")

@@ -1123,7 +1123,7 @@ def test_email_dashboard_report_schedule_force_screenshot(
 @pytest.mark.usefixtures(
     "load_birth_names_dashboard_with_slices", "create_report_slack_chart"
 )
-@patch("superset.reports.notifications.slack.WebClient.files_upload")
+@patch("superset.reports.notifications.slack.WebClient.files_upload_v2")
 @patch("superset.utils.screenshots.ChartScreenshot.get_screenshot")
 def test_slack_chart_report_schedule(
     screenshot_mock,
@@ -1147,7 +1147,10 @@ def test_slack_chart_report_schedule(
             )
 
             assert file_upload_mock.call_args[1]["channels"] == notification_targets[0]
-            assert file_upload_mock.call_args[1]["file"] == SCREENSHOT_FILE
+            assert (
+                file_upload_mock.call_args[1]["file_uploads"][0]["file"]
+                == SCREENSHOT_FILE
+            )
 
             # Assert logs are correct
             assert_log(ReportState.SUCCESS)
