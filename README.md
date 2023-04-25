@@ -63,6 +63,11 @@ Superset provides:
 
 ## Screenshots & Gifs
 
+**Video Overview**
+<a href="https://www.youtube.com/watch?v=kGfUIOK87V8" target="_blank">
+ <img src="https://i9.ytimg.com/vi/kGfUIOK87V8/mqdefault.jpg?v=64472e40&sqp=CMTcnKIG&rs=AOn4CLA9u556vbX-hOMJri0UGbiGToz2gw" alt="Superset Overview Video" width="" height="" border="" />
+</a>
+
 **Large Gallery of Visualizations**
 
 <kbd><img title="Gallery" src="superset-frontend/src/assets/images/screenshots/gallery.jpg"/></kbd><br/>
